@@ -1,3 +1,6 @@
+;; TODO:
+;; Add general.el instead of evil leader
+
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (require 'package)
@@ -28,6 +31,10 @@
   (scroll-bar-mode -1))
 (show-paren-mode 1)
 
+;;ALCHEMIST - Elixir tools
+(use-package alchemist
+  :ensure t)
+
 ;; HELM
 (use-package helm
   :ensure t
@@ -45,7 +52,18 @@
     (global-evil-leader-mode)
     (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key "f" 'helm-find-files)
+    (evil-leader/set-key "p" 'helm-projectile)
+    (evil-leader/set-key "b" 'helm-buffers-list)
+    (evil-leader/set-key "x" 'helm-M-x)
     ))
+
+;; PROJECTILE
+(use-package projectile
+  :ensure t
+  :config (projectile-global-mode)
+  (use-package helm-projectile
+    :ensure t
+    :config (helm-projectile-on)))
 
 ;; COMPANY
 (use-package company
