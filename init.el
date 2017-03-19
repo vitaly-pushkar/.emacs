@@ -18,7 +18,7 @@
 (eval-when-compile
   (require 'use-package))
 
-;; GENERAL
+;; MISCELLANEOUS 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
@@ -44,18 +44,18 @@
 (use-package evil
   :ensure t
   :config
-  (evil-mode 1)
+  (evil-mode 1))
 
-  (use-package evil-leader
-    :ensure t
-    :config
-    (global-evil-leader-mode)
-    (evil-leader/set-leader "<SPC>")
-    (evil-leader/set-key "f" 'helm-find-files)
-    (evil-leader/set-key "p" 'helm-projectile)
-    (evil-leader/set-key "b" 'helm-buffers-list)
-    (evil-leader/set-key "x" 'helm-M-x)
-    ))
+;; GENERAL
+(use-package general
+  :ensure t
+  :config
+  (setq general-default-keymaps 'evil-normal-state-map)
+  (general-define-key :prefix "<SPC>"
+		      "f" 'helm-find-files
+		      "p" 'helm-projectile
+		      "b" 'helm-buffers-list
+		      "<SPC>" 'helm-M-x))
 
 ;; PROJECTILE
 (use-package projectile
